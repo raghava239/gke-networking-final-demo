@@ -1,0 +1,16 @@
+steps:
+  # Build App 1 Image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'us-central1-docker.pkg.dev/${PROJECT_ID}/gke-networking-final-demo/app1:latest', './app1']
+  
+  # Push App 1 Image to Artifact Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'us-central1-docker.pkg.dev/${PROJECT_ID}/gke-networking-final-demo/app1:latest']
+
+  # Build App 2 Image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'us-central1-docker.pkg.dev/${PROJECT_ID}/gke-networking-final-demo/app2:latest', './app2']
+  
+  # Push App 2 Image to Artifact Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'us-central1-docker.pkg.dev/${PROJECT_ID}/gke-networking-final-demo/app2:latest']

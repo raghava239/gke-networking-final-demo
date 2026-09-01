@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app2
+  namespace: app2
+  labels:
+    app: app2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app2
+  template:
+    metadata:
+      labels:
+        app: app2
+    spec:
+      containers:
+      - name: app2-container
+        image: us-central1-docker.pkg.dev/raghupothula/gke-networking-final-demo/app2:latest
+        ports:
+        - containerPort: 80
+        resources:
+          limits:
+            cpu: "100m"
+            memory: "128Mi"
+          requests:
+            cpu: "5m"
+            memory: "16Mi"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app2-svc
+  namespace: app2
+  labels:
+    app: app2
+  annotations:
+    # GKE Gateway API requires container-native load balancing via NEGs
+    cloud.google.com/neg: '{"ingress": true}'
+spec:
+  type: ClusterIP
+  selector:
+    app: app2
+  ports:
+  - name: http
+    port: 80
+    targetPort: 80
+    protocol: TCP
