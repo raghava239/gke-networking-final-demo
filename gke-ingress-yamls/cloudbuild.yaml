@@ -1,0 +1,8 @@
+steps:
+  # Build IngressApp1 Image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'us-central1-docker.pkg.dev/${PROJECT_ID}/gke-networking-final-demo-ingress/ingress-app1:latest', '.']
+  
+  # Push IngressApp1 Image to Artifact Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'us-central1-docker.pkg.dev/${PROJECT_ID}/gke-networking-final-demo-ingress/ingress-app1:latest']
