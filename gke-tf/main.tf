@@ -1,7 +1,8 @@
 provider "google" {
-  project = var.project_id
-  region  = var.region
-  zone    = var.zone
+  project     = var.project_id
+  region      = var.region
+  zone        = var.zone
+  credentials = "/home/raghupothula/keys/terraform-svc-key.json"
 }
 
 # VPC Network
